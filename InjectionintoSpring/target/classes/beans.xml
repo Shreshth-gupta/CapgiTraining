@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+    <context:annotation-config/>
+<!--    First problem-->
+    <bean class="com.cg.first.Employee" id="employee1">
+        <property name="empId" value="101"/>
+        <property name="name" value="Shreshtha"/>
+        <property name="Sal" value="25000"/>
+        <property name="businessUnit" value="CSE"/>
+        <property name="age" value="25"/>
+    </bean>
+<!--    Second problem-->
+    <bean class="com.cg.second.Employee" id="employee2">
+        <property name="empId" value="102"/>
+        <property name="name" value="Shristy"/>
+        <property name="Sal" value="50000"/>
+        <property name="businessUnit" ref="sbu"/>
+    </bean>
+    <bean class="com.cg.second.SBU" id="sbu">
+        <property name="sbuId" value="1"/>
+        <property name="sbuName" value="Samar"/>
+        <property name="sbuHead" value="Jack"/>
+    </bean>
+<!--    Third problem-->
+    <bean class="com.cg.third.SBU" id="sbu1">
+        <property name="sbuId" value="1"/>
+        <property name="sbuName" value="Samar"/>
+        <property name="sbuHead" value="Jack"/>
+        <property name="empList">
+            <list>
+                <ref bean="emp1"/>
+                <ref bean="emp2"/>
+                <ref bean="emp3"/>
+            </list>
+        </property>
+    </bean>
+    <bean class="com.cg.third.Employee" id="emp1">
+        <property name="empId" value="101"/>
+        <property name="name" value="Jaman"/>
+        <property name="Sal" value="70000"/>
+    </bean><bean class="com.cg.third.Employee" id="emp2">
+        <property name="empId" value="102"/>
+        <property name="name" value="Shristy"/>
+        <property name="Sal" value="100000"/>
+    </bean><bean class="com.cg.third.Employee" id="emp3">
+        <property name="empId" value="104"/>
+        <property name="name" value="Luv"/>
+        <property name="Sal" value="80000"/>
+    </bean>
+</beans>
