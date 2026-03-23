@@ -1,13 +1,10 @@
 package com.cg.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.cg.entity.Employee;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@Repository
-public interface IEmployeeRepo extends JpaRepository<Employee, Integer>{
-    public List<Employee> findByName(String name);
+public interface IEmployeeRepo extends JpaRepository<Employee, Integer> {
+    List<Employee> findByName(String name);
 }

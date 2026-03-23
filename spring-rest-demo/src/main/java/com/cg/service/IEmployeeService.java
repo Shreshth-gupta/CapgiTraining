@@ -1,16 +1,15 @@
 package com.cg.service;
 
-import com.cg.DTO.EmployeeDTO;
-import com.cg.entity.Employee;
-
 import java.util.List;
 
-public interface IEmployeeService {
+import com.cg.dto.EmployeeDTO;
+import com.cg.entity.Employee;
 
-    List<Employee> getAllEmployee();
-    public EmployeeDTO creteEmployee(Employee e);
-    public EmployeeDTO getEmployeeid(int empid);
-    public String removeEmployee(int empid);
-    public EmployeeDTO updateEmployee(Employee e);
-    public List<EmployeeDTO> getEmployeeByName(String name);
+public interface IEmployeeService {
+	public List<EmployeeDTO> getAllEmployee();
+	public EmployeeDTO createEmployee(EmployeeDTO emp);
+	public EmployeeDTO getEmployee(int empid);
+	public String removeEmployee(int empid);
+	public Employee updateEmployee(Employee e);
+	public List<EmployeeDTO> getEmployeeByName(String name);
 }
