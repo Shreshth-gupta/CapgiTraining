@@ -1,11 +1,14 @@
 package com.cg.service;
 
 
+import com.cg.DTO.EmployeeDTO;
+import com.cg.DTO.EntityMapper;
 import com.cg.dao.IEmployeeRepo;
 import com.cg.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,13 +24,18 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Employee creteEmployee(Employee e) {
-        return repo.saveAndFlush(e);
+    public EmployeeDTO creteEmployee(Employee e) {
+        repo.saveAndFlush(e);
+        return EntityMapper.convertEntityToDto(e);
     }
 
     @Override
-    public Employee getEmployeeid(int empid) {
-        return repo.findById(empid).get();
+    public EmployeeDTO getEmployeeid(int empid) {
+        Employee op= repo.findById(empid).get();
+        if(op!=null){
+            return EntityMapper.convertEntityToDto(op);
+        }else
+            return null;
     }
 
     @Override
@@ -41,18 +49,23 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Employee updateEmployee(Employee e) {
+    public EmployeeDTO updateEmployee(Employee e) {
         Employee emp = null;
         Employee existing = repo.findById(emp.getEmpid()).orElse(null);
+        EmployeeDTO ed= EntityMapper.convertEntityToDto(e);
         if(existing != null) {
             repo.saveAndFlush(e);
         }else{
-            return e;
+            return ed;
         }
-        return e;
+        return ed;
     }
-    public List<Employee> getEmployeeByName(String name){
-        return repo.findByName(name);
+    @Override
+    public List<EmployeeDTO> getEmployeeByName(String name){
+        List<Employee> emps=repo.findByName(name);
+        List<EmployeeDTO> employee=new ArrayList<EmployeeDTO>();
+        emps.forEach(e->employee.add(EntityMapper.convertEntityToDto(e)));
+        return employee;
     }
 
 }
